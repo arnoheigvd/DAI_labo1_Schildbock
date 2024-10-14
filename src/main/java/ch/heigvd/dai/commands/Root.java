@@ -16,8 +16,18 @@ public class Root {
         CODE_CESAR
     }
 
-    @CommandLine.Parameters(index = "0", description = "The name of the file.")
+    @CommandLine.Option(
+            names = {"-i", "--input"},
+            description = "The input file to use",
+            required = true)
     protected String filename_input;
+
+    @CommandLine.Option(
+            names = {"-o", "--output"},
+            description = "The output file to use, default value is output.txt",
+            defaultValue = "output.txt",
+            required = true)
+    protected String filename_output;
 
     @CommandLine.Option(
             names = {"-a", "--algorithm"},
@@ -27,15 +37,9 @@ public class Root {
 
     @CommandLine.Option(
             names = {"-k", "--key"},
-            description = "The key to use.",
+            description = "The key to use for the algorithm.",
             required = true)
     protected String key;
-
-    @CommandLine.Option(
-            names = {"-o", "--output"},
-            description = "The output file to use",
-            required = true)
-    protected String filename_output;
 
     public String getFilenameInput() {
         return filename_input;

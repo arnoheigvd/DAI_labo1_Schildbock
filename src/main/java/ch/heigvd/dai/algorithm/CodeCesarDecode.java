@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 public class CodeCesarDecode implements Decrypt {
 
+    // a string that contains the alphabet used for the code cesar
     public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
     @Override
@@ -18,6 +19,7 @@ public class CodeCesarDecode implements Decrypt {
             StringBuilder content = new StringBuilder();
             String line;
 
+            // read data form the file line by line
             while ((line = reader.readLine()) != null) {
                 content.append(line).append(System.lineSeparator());
             }
@@ -27,6 +29,7 @@ public class CodeCesarDecode implements Decrypt {
 
             int shiftKey = Integer.parseInt(key);
 
+            // loop to encrypt the text char by char
             String decryptStr = "";
             for (int i = 0; i < encryptText.length(); i++) {
                 int pos = ALPHABET.indexOf(encryptText.charAt(i));
@@ -40,6 +43,8 @@ public class CodeCesarDecode implements Decrypt {
 
                 decryptStr += decryptChar;
             }
+
+            // write the string into the file
             writer.write(decryptStr);
 
         } catch (IOException e) {
