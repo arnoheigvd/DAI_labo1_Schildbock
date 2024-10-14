@@ -19,12 +19,12 @@ public class Decode implements Callable<Integer> {
 
         System.out.println(
                 "Decoding from "
-                        + parent.getFilename()
+                        + parent.getFilenameInput()
                         + " using "
                         + parent.getAlgorithm()
                         + " algorithm.");
 
-        decrypt.decode(parent.getFilename());
+        decrypt.decode(parent.getFilenameInput(), parent.getFilenameOutput(), parent.getKey());
         return 0;
     }
 }

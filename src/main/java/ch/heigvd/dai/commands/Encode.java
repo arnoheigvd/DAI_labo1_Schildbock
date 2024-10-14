@@ -19,12 +19,12 @@ public class Encode implements Callable<Integer> {
 
         System.out.println(
                 "Encoding from "
-                        + parent.getFilename()
+                        + parent.getFilenameInput()
                         + " using "
                         + parent.getAlgorithm()
                         + " algorithm.");
 
-        encrypt.encode(parent.getFilename());
+        encrypt.encode(parent.getFilenameInput(), parent.getFilenameOutput(), parent.getKey());
         return 0;
     }
 }
