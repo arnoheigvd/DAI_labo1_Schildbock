@@ -17,7 +17,7 @@ public class Root {
     }
 
     @CommandLine.Parameters(index = "0", description = "The name of the file.")
-    protected String filename;
+    protected String filename_input;
 
     @CommandLine.Option(
             names = {"-a", "--algorithm"},
@@ -25,17 +25,31 @@ public class Root {
             required = true)
     protected AvailableAlgorithm algorithm;
 
-    /*@CommandLine.Option(
+    @CommandLine.Option(
             names = {"-k", "--key"},
-            description = "The algorithm to use (possible values: ${COMPLETION-CANDIDATES}).",
+            description = "The key to use.",
             required = true)
-    protected AvailableInputOutputKey key;*/
+    protected String key;
 
-    public String getFilename() {
-        return filename;
+    @CommandLine.Option(
+            names = {"-o", "--output"},
+            description = "The output file to use",
+            required = true)
+    protected String filename_output;
+
+    public String getFilenameInput() {
+        return filename_input;
     }
 
     public AvailableAlgorithm getAlgorithm() {
         return algorithm;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public String getFilenameOutput() {
+        return filename_output;
     }
 }
