@@ -20,6 +20,8 @@ public class Decode implements Callable<Integer> {
         System.out.println(
                 "Decoding from "
                         + parent.getFilenameInput()
+                        + " to "
+                        + parent.getFilenameOutput()
                         + " using "
                         + parent.getAlgorithm()
                         + " algorithm.");
