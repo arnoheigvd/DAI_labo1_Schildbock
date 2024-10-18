@@ -1,5 +1,6 @@
 package ch.heigvd.dai.commands;
 
+import ch.heigvd.dai.algorithm.AesEncode;
 import ch.heigvd.dai.mode.Encrypt;
 import ch.heigvd.dai.algorithm.CodeCesarEncode;
 import java.util.concurrent.Callable;
@@ -15,6 +16,7 @@ public class Encode implements Callable<Integer> {
         Encrypt encrypt =
                 switch (parent.getAlgorithm()) {
                     case CODE_CESAR -> new CodeCesarEncode();
+                    case AES_ECB -> new AesEncode();
                 };
 
         System.out.println(
