@@ -1,5 +1,6 @@
 package ch.heigvd.dai.commands;
 
+import ch.heigvd.dai.algorithm.AesDecode;
 import ch.heigvd.dai.algorithm.CodeCesarDecode;
 import ch.heigvd.dai.mode.Decrypt;
 import java.util.concurrent.Callable;
@@ -15,6 +16,7 @@ public class Decode implements Callable<Integer> {
         Decrypt decrypt =
                 switch (parent.getAlgorithm()) {
                     case CODE_CESAR -> new CodeCesarDecode();
+                    case AES_ECB -> new AesDecode();
                 };
 
         System.out.println(

@@ -13,7 +13,8 @@ import picocli.CommandLine;
         mixinStandardHelpOptions = true)
 public class Root {
     public enum AvailableAlgorithm {
-        CODE_CESAR
+        CODE_CESAR,
+        AES_ECB
     }
 
     @CommandLine.Parameters(index = "0", description = "The name of the file.")
