@@ -4,6 +4,8 @@ import static ch.heigvd.dai.terminal.Color.*;
 import ch.heigvd.dai.algorithm.AesEncode;
 import ch.heigvd.dai.mode.Encrypt;
 import ch.heigvd.dai.algorithm.CodeCesarEncode;
+
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
 
@@ -14,6 +16,13 @@ public class Encode implements Callable<Integer> {
 
     @Override
     public Integer call() {
+
+        /* Checking file names */
+        if (Objects.equals(parent.getFilenameInput(), parent.getFilenameOutput())) {
+            System.err.println(RED + "Input and Output are the same file !\nLook at -h to have help." + RESET);
+            return 1;
+        }
+
         Encrypt encrypt =
                 switch (parent.getAlgorithm()) {
                     case CODE_CESAR -> new CodeCesarEncode();

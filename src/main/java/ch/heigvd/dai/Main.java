@@ -30,7 +30,6 @@ public class Main {
             } else {
                 System.out.println("Execution time in " + (end - start) / (1000 * 1000) + " [ms]");
             }
-
         }
         System.exit(exitCode);
     }

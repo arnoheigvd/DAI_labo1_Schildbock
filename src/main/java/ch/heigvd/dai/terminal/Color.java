@@ -7,4 +7,5 @@ public class Color { // colors to format the output terminal
     public static final String BLUE = "\u001B[34m"; // color blue
     public static final String GREEN = "\u001B[32m"; // color green
     public static final String MAGENTA = "\u001B[35m"; // color magenta
+    public static final String RED = "\u001B[31m"; // color red
 }
