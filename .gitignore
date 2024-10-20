@@ -10,7 +10,7 @@
 *.iws
 *.iml
 *.ipr
-
+dependency-reduced-pom.xml
 # Editor-based HTTP Client requests
 .idea/httpRequests/
 
