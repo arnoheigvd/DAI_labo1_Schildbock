@@ -61,7 +61,7 @@ Commands:
 > We suggest that you keep the default value of the `-c` option, but if you want, you can change it to `false` and it will print the output in the terminal wihtout colors !
 
 > [!IMPORTANT]
-> There is a default value to the `-o` option (output.txt), meaning that if you forget to specify an output file it will default to that one (located in the root directory of the project).
+> There is a default value to the `-o` option (output.txt), meaning that if you forget to specify an output file it will default to that one (located in the root directory of the project, might not be the same as input).
 ---
 ## Caesar Cipher
 
@@ -127,16 +127,16 @@ Execution time in 94 [ms]
 - Electronic Codebook (ECB) Mode -> In ECB mode, each block of plaintext is encrypted independently with the same key.
   
 > [!WARNING]
-> The user should be aware of :
-> - If the same plaintext block is encrypted multiple times, it will produce the same ciphertext block each time.
-> - The key given by the user is transformed in a 256 bits key with the SHA-256 algorithm, **without salt**. It makes our encryption vulnerable to brute force or dictionnary attacks
-> - Our implementation doesn't requires authentification, so the integrity of the data can't be assured.
+> The user should be aware of:
+> - When the same plaintext block is encrypted repeatedly, it will generate identical ciphertext blocks, which can expose patterns in the data.
+> - The user-provided key is converted into a 256-bit key using the SHA-256 algorithm **without salt**, which leaves the encryption susceptible to brute force or dictionary attacks.
+> - Our aplication doesn't implement any authentication, meaning the integrity of the encrypted data cannot be guaranteed or verified.
 
 ### How it works
 1. The user provides the files he needs to encrypt/decrypt and the shared key.
 2. The user's key is transformed in a 256 bits key and in a SecretKeySpec to be used by the Java Cipher class.
 3. The input file is read by 128-bits blocks and encrypted with AES, then directly writed in the output file.
-4. If the total data size ins't a multiple of 16 (bytes -> 128 bits), a padding is added using PKCS5Padding.
+4. If the total data size isn't a multiple of 16 (bytes -> 128 bits), a padding is added using PKCS5Padding.
 5. The files are closed, the input file's datas are untouched and the output file is the encrypted version.
 
 ### Examples
