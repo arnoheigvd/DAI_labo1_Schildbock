@@ -19,7 +19,7 @@ public class Encode implements Callable<Integer> {
 
         /* Checking file names */
         if (Objects.equals(parent.getFilenameInput(), parent.getFilenameOutput())) {
-            System.err.println("Input and output file can't be the same\nExiting...");
+            System.err.println(RED + "Input and Output are the same file !\nLook at -h to have help." + RESET);
             return 1;
         }
 
