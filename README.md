@@ -124,17 +124,20 @@ Execution time in 94 [ms]
 ### Key features
 - Symmetric Encryption -> AES-ECB uses the same key for both encryption and decryption. This means both the sender and receiver must securely share the key beforehand.
 - Block Cipher -> AES encrypts data in fixed-size blocks. For AES, the block size is always 128 bits (16 bytes).
-- Key Sizes -> AES supports three different key lengths: 128 bits, 192 bits, and 256 bits. The longer the key, the stronger the encryption.
-- Electronic Codebook (ECB) Mode ->
-    - In ECB mode, each block of plaintext is encrypted independently with the same key.
-    - If the same plaintext block is encrypted multiple times, it will produce the same ciphertext block each time.
+- Electronic Codebook (ECB) Mode -> In ECB mode, each block of plaintext is encrypted independently with the same key.
+  
+> [!WARNING]
+> The user should be aware of :
+> - If the same plaintext block is encrypted multiple times, it will produce the same ciphertext block each time.
+> - The key given by the user is transformed in a 256 bits key with the SHA-256 algorithm, **without salt**. It makes our encryption vulnerable to brute force or dictionnary attacks
+> - Our implementation doesn't requires authentification, so the integrity of the data can't be assured.
 
 ### How it works
-1. Input -> Data is divided into 128-bit blocks. If the data isn't a multiple of 128 bits, it needs to be padded.
-2. Encryption ->
-    - Each 128-bit block is processed separately.
-    - The AES algorithm applies a series of transformations to the block using the provided key, resulting in ciphertext.
-3. Output -> The output is a series of ciphertext blocks, which can be combined to form the encrypted message.
+1. The user provides the files he needs to encrypt/decrypt and the shared key.
+2. The user's key is transformed in a 256 bits key and in a SecretKeySpec to be used by the Java Cipher class.
+3. The input file is read by 128-bits blocks and encrypted with AES, then directly writed in the output file.
+4. If the total data size ins't a multiple of 16 (bytes -> 128 bits), a padding is added using PKCS5Padding.
+5. The files are closed, the input file's datas are untouched and the output file is the encrypted version.
 
 ### Examples
 #### Encryption
