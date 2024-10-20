@@ -4,7 +4,7 @@
 CryptoTool command-line interface (CLI) tool for cryptographic operations, allowing users to encrypt and decrypt the content of files using multiple encryption algorithms.
 
 > [!NOTE] 
-> You can find examples of input/output files for all the algorithms in the [assets](!assets/) folder.
+> You can find examples of input/output files for all the algorithms in the ![assets](assets/) folder.
 
 ## Introduction
 Do you want to know how to execute **CryptoTool** correctly, or would you like to learn more about it ? You can continue reading this document.
@@ -111,6 +111,12 @@ Execution time in 94 [ms]
 
 > [!NOTE]
 > Execution time may vary; this is normal.
+
+### Result
+`HelloW0rd!!` to `RovvyG0bvn!!`
+
+> [!NOTE]
+> In our implementation, special characters and numbers are not encrypted.
 ---
 ## AES-ECB
 **AES-ECB (Advanced Encryption Standard - Electronic Codebook)** is a symmetric encryption algorithm used to securely encode data.
@@ -163,6 +169,13 @@ Execution time in 123 [ms]
 
 > [!NOTE]
 > Execution time may vary; this is normal.
+
+### Result
+`HelloW0rld!!` to `U=oNA½¨ÌÃ[úû¨`
+
+> [!WARNING]
+> The output is in binary format, meaning it is not human-readable, so the characters displayed may vary depending on how the file is interpreted !
+
 ---
 ## Conclusion
 We hope that **CryptoTool** will assist users with various purposes, such as CTF challenges, student assignments, and more.
