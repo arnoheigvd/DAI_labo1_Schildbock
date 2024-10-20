@@ -1,64 +1,57 @@
 package ch.heigvd.dai.algorithm;
 
-
 import ch.heigvd.dai.mode.Encrypt;
 
-import javax.crypto.Cipher; // Cipher class to encrypt
-import javax.crypto.spec.SecretKeySpec; // Key to interact with Cipher
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
-import java.security.MessageDigest; // SHA-256
+import java.security.MessageDigest;
 
 public class AesEncode implements Encrypt {
-    /* Description de :
-     * Algorithme de hashage (cle)
-     * Algorithme de chiffrement (fichier)
-     * Mode de chiffrement
-     * Taille du buffer (pour le chiffrement)
-     * */
+
     private static final String ALGORITHM_KEY = "SHA-256";
     private static final String ALGORITHM_CIPHER = "AES";
     private static final String MODE = "AES/ECB/PKCS5Padding";
-    /* Peut valoir ce qu'on veut, j'ai choisi 16 octects pour représenter un bloc de données
-     * Probablement un peu plus lent
-     * */
-    private static final int BUFFER_SIZE = 16;
+    private static final int BUFFER_SIZE = 16; // custom chosen buffer size of 16 bytes
 
     @Override
     public void encode(String filename_input, String filename_output, String password) {
-
         SecretKeySpec key;
         Cipher cipher = null;
-
         try {
-            /* Generation d'une cle 256bits a l'aide de SHA-256 */
-            /* Creation de l'outil de hashage */
+
+            //Generate a 256-bit key using SHA-256 and create the hashing tool
             MessageDigest sha = MessageDigest.getInstance(ALGORITHM_KEY);
-            /* Hachage du mot de passe (digest) et creation de la cle */
+
+            // Hash the password (digest) and create the key
             key = new SecretKeySpec(sha.digest(password.getBytes()), ALGORITHM_CIPHER);
 
-            /* Creation et initialisation du chiffreur AES-ECB */
+            // Creation et initialisation of the cypher mode AES-ECB
             cipher = Cipher.getInstance(MODE);
-            cipher.init(Cipher.ENCRYPT_MODE, key); // Seul vrai changement entre encrypt et decrypt
-        } catch (Exception e) {System.out.println("Error in encoding AES -> " + e.getMessage()); }
 
-        /* Lecture clear text et ecriture cipher text*/
-        try (BufferedInputStream inputStream =
-                     new BufferedInputStream(new FileInputStream(filename_input));
-             BufferedOutputStream outputStream =
-                     new BufferedOutputStream(new FileOutputStream(filename_output))) {
+            // We want to decrypt
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+
+        } catch (Exception e) {
+            System.err.println("Error in instancing the cypher AES for encode -> " + e.getMessage());
+        }
+        // Read ciphertext and write the decrypted plaintext
+        try (BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(filename_input));
+             BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(filename_output))) {
 
             byte[] tmp = new byte[BUFFER_SIZE];
             int b;
 
             while ((b = inputStream.read(tmp)) != -1) {
-                /* Chiffrement (cipher.update) et ecriture */
+                // Encrypt (cipher.update) and write the output
                 outputStream.write(cipher.update(tmp, 0, b));
             }
 
-            /* Chiffrement de la fin (ajout du padding, etc)*/
+            // Final encryption step (adding padding, etc.)
             outputStream.write(cipher.doFinal());
 
-        } catch (Exception e) { System.err.println("Error in encoding AES -> " + e.getMessage()); }
-
+        } catch (Exception e) {
+            System.err.println("Error in reading/writing files for AES encode -> " + e.getMessage());
+        }
     }
 }

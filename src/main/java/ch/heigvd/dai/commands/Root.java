@@ -3,7 +3,7 @@ package ch.heigvd.dai.commands;
 import picocli.CommandLine;
 
 @CommandLine.Command(
-        description = "A CLI to encrypt/decrypt files using different algorithm.",
+        description = "A CLI to encrypt/decrypt files using different algorithms.",
         version = "1.0.0",
         subcommands = {
                 Decode.class,
@@ -42,6 +42,13 @@ public class Root {
             required = true)
     protected String key;
 
+    @CommandLine.Option(
+            names = {"-c", "--color"},
+            description = "Add color to the output terminal",
+            defaultValue = "true",
+            required = false)
+    protected boolean choiceColor;
+
     public String getFilenameInput() {
         return filename_input;
     }
@@ -56,5 +63,9 @@ public class Root {
 
     public String getFilenameOutput() {
         return filename_output;
+    }
+
+    public boolean getChoiceColor() {
+        return choiceColor;
     }
 }

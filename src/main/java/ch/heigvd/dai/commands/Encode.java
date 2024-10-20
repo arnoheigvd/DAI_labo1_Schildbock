@@ -1,5 +1,6 @@
 package ch.heigvd.dai.commands;
 
+import static ch.heigvd.dai.terminal.Color.*;
 import ch.heigvd.dai.algorithm.AesEncode;
 import ch.heigvd.dai.mode.Encrypt;
 import ch.heigvd.dai.algorithm.CodeCesarEncode;
@@ -19,14 +20,25 @@ public class Encode implements Callable<Integer> {
                     case AES_ECB -> new AesEncode();
                 };
 
-        System.out.println(
-                "Encoding from "
-                        + parent.getFilenameInput()
-                        + " to "
-                        + parent.getFilenameOutput()
-                        + " using "
-                        + parent.getAlgorithm()
-                        + " algorithm.");
+        if (parent.getChoiceColor()){
+            System.out.println(
+                    BOLD + "Encoding" + RESET + " from "
+                            + MAGENTA + parent.getFilenameInput() + RESET
+                            + " to "
+                            + MAGENTA + parent.getFilenameOutput() + RESET
+                            + " using "
+                            + GREEN + parent.getAlgorithm() + RESET
+                            + " algorithm.");
+        } else {
+            System.out.println(
+                    "Encoding from "
+                            + parent.getFilenameInput()
+                            + " to "
+                            + parent.getFilenameOutput()
+                            + " using "
+                            + parent.getAlgorithm()
+                            + " algorithm.");
+        }
 
         encrypt.encode(parent.getFilenameInput(), parent.getFilenameOutput(), parent.getKey());
         return 0;
