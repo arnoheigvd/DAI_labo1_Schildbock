@@ -89,7 +89,7 @@ $ java -jar target/lab01-crypto-1.0-SNAPSHOT.jar -a=CODE_CESAR -k=10 -i=assets/c
 If successful, the output will be:
 ```sh
 Encoding from assets/code_ceasar/input.txt to assets/code_ceasar/output.txt using CODE_CESAR algorithm.
-Execution time in 92 [ms]
+Execution time in 89 [ms]
 ```
 
 > [!NOTE]
@@ -106,7 +106,7 @@ $ java -jar target/lab01-crypto-1.0-SNAPSHOT.jar -a=CODE_CESAR -k=10 -i=assets/c
 If successful, the output will be :
 ```sh
 Decoding from assets/code_ceasar/output.txt to assets/code_ceasar/result.txt using CODE_CESAR algorithm.
-Execution time in 92 [ms]
+Execution time in 94 [ms]
 ```
 
 > [!NOTE]
