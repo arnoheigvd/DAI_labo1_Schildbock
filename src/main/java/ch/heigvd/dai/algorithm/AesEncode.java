@@ -29,7 +29,7 @@ public class AesEncode implements Encrypt {
             // Creation et initialisation of the cypher mode AES-ECB
             cipher = Cipher.getInstance(MODE);
 
-            // We want to decrypt
+            // We want to encrypt
             cipher.init(Cipher.ENCRYPT_MODE, key);
 
         } catch (Exception e) {

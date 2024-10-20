@@ -4,7 +4,7 @@
 CryptoTool command-line interface (CLI) tool for cryptographic operations, allowing users to encrypt and decrypt the content of files using multiple encryption algorithms.
 
 > [!NOTE] 
-> You can find examples of input/output files for all the algorithms in the [assets](!assets/) folder.
+> You can find examples of input/output files for all the algorithms in the ![assets](assets/) folder.
 
 ## Introduction
 Do you want to know how to execute **CryptoTool** correctly, or would you like to learn more about it ? You can continue reading this document.
@@ -61,7 +61,7 @@ Commands:
 > We suggest that you keep the default value of the `-c` option, but if you want, you can change it to `false` and it will print the output in the terminal wihtout colors !
 
 > [!IMPORTANT]
-> There is a default value to the `-o` option (output.txt), meaning that if you forget to specify an output file it will default to that one (located in the root directory of the project).
+> There is a default value to the `-o` option (output.txt), meaning that if you forget to specify an output file it will default to that one (located in the root directory of the project, might not be the same as input).
 ---
 ## Caesar Cipher
 
@@ -111,6 +111,12 @@ Execution time in 94 [ms]
 
 > [!NOTE]
 > Execution time may vary; this is normal.
+
+### Result
+`HelloW0rd!!` to `RovvyG0bvn!!`
+
+> [!NOTE]
+> In our implementation, special characters and numbers are not encrypted.
 ---
 ## AES-ECB
 **AES-ECB (Advanced Encryption Standard - Electronic Codebook)** is a symmetric encryption algorithm used to securely encode data.
@@ -118,17 +124,20 @@ Execution time in 94 [ms]
 ### Key features
 - Symmetric Encryption -> AES-ECB uses the same key for both encryption and decryption. This means both the sender and receiver must securely share the key beforehand.
 - Block Cipher -> AES encrypts data in fixed-size blocks. For AES, the block size is always 128 bits (16 bytes).
-- Key Sizes -> AES supports three different key lengths: 128 bits, 192 bits, and 256 bits. The longer the key, the stronger the encryption.
-- Electronic Codebook (ECB) Mode ->
-    - In ECB mode, each block of plaintext is encrypted independently with the same key.
-    - If the same plaintext block is encrypted multiple times, it will produce the same ciphertext block each time.
+- Electronic Codebook (ECB) Mode -> In ECB mode, each block of plaintext is encrypted independently with the same key.
+  
+> [!WARNING]
+> The user should be aware of:
+> - When the same plaintext block is encrypted repeatedly, it will generate identical ciphertext blocks, which can expose patterns in the data.
+> - The user-provided key is converted into a 256-bit key using the SHA-256 algorithm **without salt**, which leaves the encryption susceptible to brute force or dictionary attacks.
+> - Our aplication doesn't implement any authentication, meaning the integrity of the encrypted data cannot be guaranteed or verified.
 
 ### How it works
-1. Input -> Data is divided into 128-bit blocks. If the data isn't a multiple of 128 bits, it needs to be padded.
-2. Encryption ->
-    - Each 128-bit block is processed separately.
-    - The AES algorithm applies a series of transformations to the block using the provided key, resulting in ciphertext.
-3. Output -> The output is a series of ciphertext blocks, which can be combined to form the encrypted message.
+1. The user provides the files he needs to encrypt/decrypt and the shared key.
+2. The user's key is transformed in a 256 bits key and in a SecretKeySpec to be used by the Java Cipher class.
+3. The input file is read by 128-bits blocks and encrypted with AES, then directly writed in the output file.
+4. If the total data size isn't a multiple of 16 (bytes -> 128 bits), a padding is added using PKCS5Padding.
+5. The files are closed, the input file's datas are untouched and the output file is the encrypted version.
 
 ### Examples
 #### Encryption
@@ -163,6 +172,13 @@ Execution time in 123 [ms]
 
 > [!NOTE]
 > Execution time may vary; this is normal.
+
+### Result
+`HelloW0rld!!` to `U=oNA½¨ÌÃ[úû¨`
+
+> [!WARNING]
+> The output is in binary format, meaning it is not human-readable, so the characters displayed may vary depending on how the file is interpreted !
+
 ---
 ## Conclusion
 We hope that **CryptoTool** will assist users with various purposes, such as CTF challenges, student assignments, and more.
