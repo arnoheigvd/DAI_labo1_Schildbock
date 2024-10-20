@@ -97,7 +97,7 @@ Execution time in 89 [ms]
 
 #### Decryption
 
-Let's decode the file `output.txt` (from the assets) to a `result.txt` file so that we can compare it with the `input.txt` from [before](#encryption).
+Let's decode the file `output.txt` (from the assets) to a `result.txt` file so that we can compare it with the `input.txt` from [before](#encryption-1).
 
 ```sh
 $ java -jar target/lab01-crypto-1.0-SNAPSHOT.jar -a=CODE_CESAR -k=10 -i=assets/code_ceasar/output.txt -o=assets/code_ceasar/result.txt decode
