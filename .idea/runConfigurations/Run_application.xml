@@ -3,7 +3,8 @@
     <option name="ALTERNATIVE_JRE_PATH" value="temurin-21" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="ch.heigvd.dai.Main" />
-    <module name="java-ios" />
+    <module name="lab01-crypto" />
+    <option name="PROGRAM_PARAMETERS" value="-a=CODE_CESAR -k=3 -o=input.txt output.txt encode" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

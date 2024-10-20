@@ -8,9 +8,6 @@ import java.nio.charset.StandardCharsets;
 
 public class CodeCesarDecode implements Decrypt {
 
-    // a string that contains the alphabet used for the code cesar
-    public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
-
     @Override
     public void decode(String filename_input, String filename_output, String key){
         try (BufferedReader reader = new BufferedReader(new FileReader(filename_input, StandardCharsets.UTF_8));
@@ -25,27 +22,29 @@ public class CodeCesarDecode implements Decrypt {
             }
 
             String encryptText = content.toString();
-            encryptText = encryptText.toLowerCase().trim();
+            encryptText = encryptText.trim();
 
             int shiftKey = Integer.parseInt(key);
 
-            // loop to encrypt the text char by char
-            String decryptStr = "";
+            StringBuilder decryptText = new StringBuilder();
+
+            // loop to decrypt the text char by char
             for (int i = 0; i < encryptText.length(); i++) {
-                int pos = ALPHABET.indexOf(encryptText.charAt(i));
+                char currentChar = encryptText.charAt(i);
 
-                int decryptPos = (pos - shiftKey) % 26;
+                if (Character.isLetter(currentChar)) {
+                    char base = Character.isUpperCase(currentChar) ? 'A' : 'a'; // Determine base (A or a)
 
-                if (decryptPos < 0){
-                    decryptPos = ALPHABET.length() + decryptPos;
+                    char decryptedChar = (char) ((currentChar - base - shiftKey + 26) % 26 + base);
+                    decryptText.append(decryptedChar);
+                } else {
+                    // do nothing for specials characters and numbers
+                    decryptText.append(currentChar);
                 }
-                char decryptChar = ALPHABET.charAt(decryptPos);
-
-                decryptStr += decryptChar;
             }
 
-            // write the string into the file
-            writer.write(decryptStr);
+            // write the decrypt text into the file
+            writer.write(decryptText.toString());
 
         } catch (IOException e) {
             System.err.println("Error in decoding CodeCesar -> " + e.getMessage());
