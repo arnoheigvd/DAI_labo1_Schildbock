@@ -16,13 +16,20 @@ backgroundColor: "#add8e6"
 Author: **David Schildböck & Arno Tribolet**  
 Date: October 2024
 
+GitHub repo &rarr; 
+**https://github.com/arnoheigvd/DAI_labo1_Schildbock_Tribolet**
+
 ---
 
 <!-- _Slide 2: Introduction_ -->
 # Plan/Introduction  
 - The workflow GitHub
-- The CLI application - Ceasar cypher and AES algorithm
+- The CLI application - Caesar cypher and AES algorithm
 - Conclusion / Questions
+
+\
+*It is a capital mistake to theorize before one has data. Yet, every misstep brings us closer to the truth.* 
+by **Sherlock Holmes**
 
 ---
 
@@ -43,16 +50,26 @@ Date: October 2024
 <!-- _Slide 4: Main Content - CLI Application_ -->
 # CLI Application
 - **JAVA** - the language used
-- **Maven Wrapper** - a tool used to create a java archive (JAR) 
-- **Picocli** - a library used to create a CLI application
+- **Maven Wrapper** - a tool used to create a java archive (**JAR**) 
+- **Picocli** - a library used to create a CLI(Command Line Interface) application
+
+<br>
+<div style="display: flex; justify-content: center; gap: 20px;">
+    <img src="assets/java.png" alt="Java" style="width: 150px; height: auto;">
+    <img src="assets/maven.png" alt="Maven" style="width: 150px; height: auto;">
+    <img src="assets/picocli.jpg" alt="Maven" style="width: 250px; height: auto;">
+</div>
 
 ---
 
-<!-- _Slide 5: Main Content - Ceasar cipher_ -->
-# Ceasar cipher
+<!-- _Slide 5: Main Content - Caesar cipher_ -->
+# Caesar cipher
 - Take a **shift key**(k)
 - Take the **character**(c) and change it to **c+k**
-- Example &rarr; c=A, k=1 &rarr; A+1 = B
+- Example &rarr; c=A, k=1 &rarr; **A+1 = B**
+
+![center](assets/jules-cesar.jpg)
+<p style="text-align: center; font-size: 0.5em;">Julius Caesar, namesake of the Caesar cipher</p>
 
 ---
 
@@ -71,6 +88,23 @@ Date: October 2024
 - Learned a lot
 - Fun
 - **Questions ??**
+
+<style>
+  img[alt~='right'] {
+    float: right;
+    max-width: 200px;
+  }
+  .bottom-left-text {
+    position: absolute;
+    bottom: 60px;
+    left: 30px;
+    font-size: 0.7em;
+    text-align: left;
+  }
+</style>
+![bg right fit](assets/question.gif)
+
+<div class="bottom-left-text">&rarr; Read our <strong>README.md</strong> for more information !</div>
 
 ---
 
